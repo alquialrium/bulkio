@@ -34,6 +34,7 @@
                         var(--bg);
             position: relative;
             overflow: hidden;
+            padding-bottom: 92px;
         }
 
         .shape {
@@ -184,6 +185,7 @@
 
         .socials {
             margin-top: clamp(14px, 2.6vh, 24px);
+            margin-bottom: clamp(48px, 10vh, 120px);
             display: flex;
             gap: 12px;
             justify-content: center;
@@ -224,6 +226,74 @@
             font-size: 0.95rem;
         }
 
+        .footer-links {
+            margin-top: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px 36px;
+        }
+
+        .footer-links a {
+            color: #dbe3f2;
+            text-decoration: none;
+            font-size: 0.9rem;
+            border-bottom: 1px solid transparent;
+            padding: 2px 0;
+        }
+
+        .footer-links a:hover {
+            border-bottom-color: #dbe3f2;
+        }
+
+        .legal-notice {
+            position: fixed;
+            left: 12px;
+            right: 12px;
+            bottom: 10px;
+            margin: 0 auto;
+            max-width: 1200px;
+            color: #bdc8d9;
+            font-size: 0.72rem;
+            line-height: 1.35;
+            text-align: center;
+            background: rgba(8, 11, 20, 0.78);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 8px 12px;
+            backdrop-filter: blur(6px);
+        }
+
+        .legal-notice.is-hidden {
+            display: none;
+        }
+
+        body.notice-hidden {
+            padding-bottom: 20px;
+        }
+
+        .legal-notice strong {
+            color: #e5ebf6;
+        }
+
+        .legal-notice-close {
+            display: none;
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.06);
+            color: #e5ebf6;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            padding: 0;
+            font-size: 0.8rem;
+            line-height: 1;
+            cursor: pointer;
+        }
+
         @media (max-height: 820px) {
             .brand svg {
                 width: 64px;
@@ -261,9 +331,24 @@
             .footer {
                 font-size: 0.88rem;
             }
+
+            .legal-notice {
+                font-size: 0.66rem;
+                line-height: 1.28;
+                bottom: 8px;
+            }
         }
 
         @media (max-width: 1024px) {
+            body {
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+
+            .socials {
+                margin-bottom: clamp(24px, 5vh, 60px);
+            }
+
             .title {
                 font-size: clamp(2.8rem, 9vw, 5rem);
             }
@@ -294,6 +379,10 @@
                 font-size: 0.95rem;
             }
 
+            .footer-links a {
+                font-size: 0.82rem;
+            }
+
             .lang-toggle {
                 right: 18px;
                 top: 18px;
@@ -314,6 +403,19 @@
             .social-link {
                 min-width: 180px;
             }
+
+            .legal-notice {
+                left: 8px;
+                right: 8px;
+                padding: 7px 32px 7px 10px;
+                font-size: 0.62rem;
+            }
+
+            .legal-notice-close {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -327,9 +429,18 @@
         <section class="hero">
             <div class="brand" aria-label="Bulkio">
                 <svg viewBox="0 0 200 200" width="84" height="84" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <g transform="rotate(0 100 100)"><rect x="65" y="18" width="70" height="98" rx="16" fill="#f25535"/></g>
-                    <g transform="rotate(120 100 100)"><rect x="65" y="18" width="70" height="98" rx="16" fill="#f5c846"/></g>
-                    <g transform="rotate(240 100 100)"><rect x="65" y="18" width="70" height="98" rx="16" fill="#12b9be"/></g>
+                    <g transform="rotate(0 100 100)">
+                        <rect x="65" y="18" width="70" height="98" rx="16" fill="#f25535"/>
+                        <circle cx="81" cy="34" r="5.5" fill="#f8f1de"/>
+                    </g>
+                    <g transform="rotate(120 100 100)">
+                        <rect x="65" y="18" width="70" height="98" rx="16" fill="#f5c846"/>
+                        <circle cx="81" cy="34" r="5.5" fill="#f8f1de"/>
+                    </g>
+                    <g transform="rotate(240 100 100)">
+                        <rect x="65" y="18" width="70" height="98" rx="16" fill="#12b9be"/>
+                        <circle cx="81" cy="34" r="5.5" fill="#d5efe9"/>
+                    </g>
                 </svg>
                 <div class="brand-word">Bulkio</div>
             </div>
@@ -367,8 +478,19 @@
             </div>
 
             <div class="footer" data-i18n="footer">© {{ date('Y') }} Bulkio - Nueva vida para tus cartas</div>
+            <div class="footer-links" aria-label="Legal links">
+                <a id="terms-link" href="{{ route('legal.terms') }}" data-i18n="termsLink">Términos y condiciones</a>
+                <a id="privacy-link" href="{{ route('legal.privacy') }}" data-i18n="privacyLink">Privacidad</a>
+                <a id="cookies-link" href="{{ route('legal.cookies') }}" data-i18n="cookiesLink">Cookies</a>
+            </div>
         </section>
     </main>
+
+    <div class="legal-notice">
+        <strong data-i18n="legalNoticeTitle">Aviso Legal:</strong>
+        <span data-i18n="legalNoticeBody"> Bulkio es un proyecto comunitario independiente, creado por fans y sin fines de lucro. Este sitio web no está afiliado, respaldado, patrocinado ni asociado de ninguna manera con Bandai Co., Ltd., Shueisha, Bushiroad, The Pokemon Company, Wizards of the Coast, Ravensburger, ni con ninguna otra empresa creadora o distribuidora de los juegos de cartas mencionados en esta plataforma. Todas las marcas registradas, nombres de juegos, personajes e ilustraciones son propiedad exclusiva de sus respectivos dueños. Su uso en este sitio se realiza bajo el amparo de los derechos de critica, analisis, educacion y uso recreativo no comercial (Uso Fan).</span>
+        <button id="legal-notice-close" class="legal-notice-close" type="button" aria-label="Close legal notice">x</button>
+    </div>
 
     <script>
         const i18n = {
@@ -382,6 +504,11 @@
                 cta: 'Notificame',
                 placeholder: 'tu@email.com',
                 footer: '© {{ date('Y') }} Bulkio - Nueva vida para tus cartas',
+                termsLink: 'Términos y condiciones',
+                privacyLink: 'Privacidad',
+                cookiesLink: 'Cookies',
+                legalNoticeTitle: 'Aviso Legal:',
+                legalNoticeBody: 'Bulkio es un proyecto comunitario independiente, creado por fans y sin fines de lucro. Este sitio web no esta afiliado, respaldado, patrocinado ni asociado de ninguna manera con Bandai Co., Ltd., Shueisha, Bushiroad, The Pokemon Company, Wizards of the Coast, Ravensburger, ni con ninguna otra empresa creadora o distribuidora de los juegos de cartas mencionados en esta plataforma. Todas las marcas registradas, nombres de juegos, personajes e ilustraciones son propiedad exclusiva de sus respectivos dueños. Su uso en este sitio se realiza bajo el amparo de los derechos de critica, analisis, educacion y uso recreativo no comercial (Uso Fan).',
                 fallbackError: 'Algo salio mal, intenta de nuevo.',
             },
             en: {
@@ -394,6 +521,11 @@
                 cta: 'Notify me',
                 placeholder: 'you@email.com',
                 footer: '© {{ date('Y') }} Bulkio - New life for your cards',
+                termsLink: 'Terms and conditions',
+                privacyLink: 'Privacy',
+                cookiesLink: 'Cookies',
+                legalNoticeTitle: 'Legal Notice:',
+                legalNoticeBody: 'Bulkio is an independent, fan-created, non-profit community project. This website is not affiliated with, endorsed by, sponsored by, or associated in any way with Bandai Co., Ltd., Shueisha, Bushiroad, The Pokemon Company, Wizards of the Coast, Ravensburger, or any other company that creates or distributes the card games mentioned on this platform. All trademarks, game names, characters, and illustrations are the exclusive property of their respective owners. Their use on this site is protected under rights of criticism, analysis, education, and non-commercial recreational use (Fan Use).',
                 fallbackError: 'Something went wrong, please try again.',
             },
         };
@@ -407,6 +539,11 @@
         const instagramHandle = document.getElementById('instagram-handle');
         const tiktokLink = document.getElementById('tiktok-link');
         const tiktokHandle = document.getElementById('tiktok-handle');
+        const termsLink = document.getElementById('terms-link');
+        const privacyLink = document.getElementById('privacy-link');
+        const cookiesLink = document.getElementById('cookies-link');
+        const legalNotice = document.querySelector('.legal-notice');
+        const legalNoticeClose = document.getElementById('legal-notice-close');
 
         const socialByLang = {
             es: {
@@ -468,6 +605,9 @@
             instagramHandle.textContent = socialByLang[lang].instagram.label;
             tiktokLink.href = socialByLang[lang].tiktok.href;
             tiktokHandle.textContent = socialByLang[lang].tiktok.label;
+            termsLink.href = `{{ route('legal.terms') }}?lang=${lang}`;
+            privacyLink.href = `{{ route('legal.privacy') }}?lang=${lang}`;
+            cookiesLink.href = `{{ route('legal.cookies') }}?lang=${lang}`;
 
             i18nElements.forEach((element) => {
                 const key = element.dataset.i18n;
@@ -479,6 +619,12 @@
 
         langToggle.addEventListener('click', () => {
             applyLanguage(currentLang === 'es' ? 'en' : 'es');
+        });
+
+        legalNoticeClose.addEventListener('click', () => {
+            legalNotice.classList.add('is-hidden');
+            document.body.classList.add('notice-hidden');
+            localStorage.setItem('bulkio_notice_closed', '1');
         });
 
         form.addEventListener('submit', async (event) => {
@@ -512,6 +658,11 @@
                 setMessage(i18n[currentLang].fallbackError, 'error');
             }
         });
+
+        if (window.matchMedia('(max-width: 1024px)').matches && localStorage.getItem('bulkio_notice_closed') === '1') {
+            legalNotice.classList.add('is-hidden');
+            document.body.classList.add('notice-hidden');
+        }
 
         applyLanguage(currentLang);
     </script>
