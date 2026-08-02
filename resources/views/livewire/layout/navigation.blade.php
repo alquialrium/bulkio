@@ -33,6 +33,14 @@ new class extends Component
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @if (auth()->user()->hasRole(['super', 'admin']))
+                        <x-nav-link :href="route('newsletter.index')" :active="request()->routeIs('newsletter.*')" wire:navigate>
+                            {{ __('Newsletter') }}
+                        </x-nav-link>
+                            <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')" wire:navigate>
+                                {{ __('Usuarios') }}
+                            </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -84,6 +92,14 @@ new class extends Component
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            @if (auth()->user()->hasRole(['super', 'admin']))
+                <x-responsive-nav-link :href="route('newsletter.index')" :active="request()->routeIs('newsletter.*')" wire:navigate>
+                    {{ __('Newsletter') }}
+                </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')" wire:navigate>
+                        {{ __('Usuarios') }}
+                    </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->
