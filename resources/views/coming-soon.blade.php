@@ -383,6 +383,13 @@
                 font-size: 0.82rem;
             }
 
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+            }
+
             .lang-toggle {
                 right: 18px;
                 top: 18px;
